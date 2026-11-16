@@ -1,0 +1,85 @@
+# 1. Python is better for automating complex, repetitive tasks on massive datasets that would crash Excel. Excel is better for quick, one-time checks and manual data entry. 
+# 2. A server error logs benefits from append mode because it records events chronologically without overwriting past history, which preserves a complete and permanent audit trail. 
+
+
+#Exercise2
+import csv
+with open("data/sales.csv", "r") as f:
+  reader = csv.reader(f)
+for row in reader:
+  print(row)
+
+## Exercise3
+import csv
+with open("data/sales.csv", "r") as f:
+  reader = csv.reader(f)
+header = next(reader)
+    print("Header:", header)
+for row in reader:
+  print(row)
+
+# Exercise4
+total_revenue = 0
+price = float(row[1])
+    qty = int(row[2])
+revenue = price * qty
+total_revenue += revenue
+print(f"{row[0]}: {qty} units * ${price:.2f} = ${revenue:.2f}")
+
+#Exercise5
+import csv
+original_count = 0
+written_count = 0
+with open("data/sales.csv", "r") as f_in, open("data/cleaned.csv", "w", newline="") as f_out:
+  reader = csv.reader(f_in)
+  writer = csv.writer(f_out)
+
+header = next(reader)
+writer.writerow(header + ["Total"])
+
+    for row in reader: 
+original_count += 1
+  price, qty = float(row[1]), int(row[2])
+  total = price * qty
+
+  if total > 100:
+writer.writerow(row + [f"{total:.2f}"])
+  written_count += 1
+
+print(f"Original rows: {original_count}, Written rows: {written_count}")
+
+
+#Exercise6
+import csv
+with open("data/sales.csv", "r") as f:
+reader = csv. DictReader(f)
+  total_revenue = 0
+
+for row in reader:
+revenue = float(row["price"]) * int(row["quantity"])
+  total_revenue += revenue
+
+print(f"Total Revenue: ${total_revenue:.2f}")
+
+
+#Exercise7
+summary = {}
+for row in reader:
+product, revenue = row["product"], float(row["price]) * int(row["quantity"])
+summary[product] = summary.get(product, 0) + revenue
+
+for product in sorted(summary):
+  print(f"{product}: ${summary[product]:.2f}")
+
+
+#Exercise8
+from datetime import datetime
+
+with open("data/run_log.txt", "a") as f:
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    f.write(f"{timestamp} - Total Revenue: ${total_revenue:.2f}")
+                                             
+                                          
+                                             
+  
+  
